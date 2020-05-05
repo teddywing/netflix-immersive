@@ -3,8 +3,6 @@ import { styles } from './styles';
 
 
 with_player(function(player) {
-	// window.player = player;
-
 	init_mutation_observer(player);
 });
 
