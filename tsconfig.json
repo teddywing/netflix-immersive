@@ -1,8 +1,8 @@
 {
 	"compilerOptions": {
-		"module": "amd",
+		"module": "commonjs",
 		"target": "ES5",
-		"outFile": "./dist/netflix-no-skip.user.js",
+		"outDir": "./build",
 		"sourceMap": true
 	},
 	"files": [

@@ -1,0 +1,9 @@
+// ==UserScript==
+// @name Netflix No Skip
+// @description Netflix user script providing a more immersive experience
+// @version 0.0.1
+// @namespace com.teddywing
+// @run-at document-idle
+// @match https://www.netflix.com/watch/*
+// ==/UserScript==
+
