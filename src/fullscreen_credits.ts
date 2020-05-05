@@ -1,4 +1,4 @@
-export function with_player (callback) {
+function with_player (callback) {
 	var interval = setInterval(
 		function() {
 			var player = document.querySelector('.NFPlayer.nf-player-container');
@@ -13,7 +13,7 @@ export function with_player (callback) {
 	);
 }
 
-export function init_mutation_observer (player) {
+function init_mutation_observer (player) {
 	var observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
 			var mutation = mutation_list[i];
@@ -57,4 +57,10 @@ export function init_mutation_observer (player) {
 			attributeOldValue: true
 		}
 	);
+}
+
+export default function init () {
+	with_player(function(player) {
+		init_mutation_observer(player);
+	});
 }
