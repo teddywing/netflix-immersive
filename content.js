@@ -18,16 +18,10 @@ function init_mutation_observer (player) {
 		for (var i = 0; i < mutation_list.length; i++) {
 			var mutation = mutation_list[i];
 
-			console.log(
-				mutation.target.className +
-				'\n' +
-				mutation.oldValue
-			);
+			if (mutation.target.classList.contains('postplay')) {
+				mutation.target.classList.remove('postplay');
 
-			if (mutation.target.classList.includes('postplay')) {
-				mutation.target.classList = mutation.target.classList.filter(function(c) {
-					return c !== 'postplay';
-				});
+				return;
 			}
 		}
 	});
@@ -43,5 +37,7 @@ function init_mutation_observer (player) {
 
 
 with_player(function(player) {
+	window.player = player;
+
 	init_mutation_observer(player);
 });
