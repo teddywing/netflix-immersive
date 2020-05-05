@@ -1,0 +1,8 @@
+{
+  "name": "netflix-no-skip",
+  "version": "0.0.1",
+  "devDependencies": {
+    "typescript": "^3.8.3"
+  },
+  "private": true
+}

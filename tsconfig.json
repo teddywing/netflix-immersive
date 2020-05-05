@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"module": "amd",
+		"target": "ES5",
+		"outFile": "./dist/netflix-no-skip.user.js",
+		"sourceMap": true
+	},
+	"files": [
+		"src/index.ts"
+	]
+}
