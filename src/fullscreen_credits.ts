@@ -3,10 +3,10 @@ import wait_element from './wait_element';
 
 
 function init_mutation_observer (player) {
-	var observer = new MutationObserver(function(mutation_list) {
+	const observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
-			var mutation = mutation_list[i];
-			var player = mutation.target as HTMLElement;
+			const mutation = mutation_list[i];
+			const player = mutation.target as HTMLElement;
 
 			if (player.classList.contains('postplay')) {
 				player.classList.remove('postplay');

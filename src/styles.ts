@@ -1,9 +1,9 @@
 export function styles () {
-	var style = document.createElement('style');
+	const style = document.createElement('style');
 
 	document.head.appendChild(style);
 
-	var stylesheet = style.sheet as CSSStyleSheet;
+	const stylesheet = style.sheet as CSSStyleSheet;
 
 	stylesheet.insertRule(
 		'.OriginalsPostPlay-BackgroundTrailer .BackToBrowse { visibility: hidden; }',
