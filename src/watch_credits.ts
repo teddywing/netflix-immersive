@@ -3,10 +3,6 @@ import logger from './logger';
 import wait_element from './wait_element';
 
 
-// const watch_credits_button = document.querySelector('[data-uia="watch-credits-seamless-button"]');
-
-
-
 function init_mutation_observer (controls) {
 	var observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {

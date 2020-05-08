@@ -14,20 +14,7 @@ function init_mutation_observer (player) {
 				// Activate player controls.
 				player.click();
 
-				// TODO: Change .active to .inactive
-				// mutation.target.classList.replace('active', 'inactive'); // Didn't work
-				// Remove .can-resume: Removes white border on hover
-				// PlayerControlsNeo__bottom-controls PlayerControlsNeo__bottom-controls--faded
-				// PlayerControlsNeo__layout PlayerControlsNeo__layout--active
-				// PlayerControlsNeo__layout PlayerControlsNeo__layout--inactive
-
-				// document.querySelector('.PlayerControlsNeo__bottom-controls')
-				// 	.classList
-				// 	.add('PlayerControlsNeo__bottom-controls--faded');
-
 				controls.hide();
-
-				// .OriginalsPostPlay-BackgroundTrailer .BackToBrowse
 
 				return;
 			}
