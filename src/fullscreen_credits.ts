@@ -19,18 +19,24 @@ import controls from './controls';
 import wait_element from './wait_element';
 
 
+// Prevent credits from being minimised.
 function init_mutation_observer (player) {
 	const observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
 			const mutation = mutation_list[i];
 			const player = mutation.target as HTMLElement;
 
+			// The `postplay` class minimises the movie. Remove it if it gets
+			// added to remain in full frame.
 			if (player.classList.contains('postplay')) {
 				player.classList.remove('postplay');
 
-				// Activate player controls.
+				// Playback controls are removed when postplay is activated.
+				// Re-enable them.
 				player.click();
 
+				// Activating playback controls makes them visible. Keep them
+				// hidden.
 				controls.hide();
 
 				return;
@@ -47,6 +53,7 @@ function init_mutation_observer (player) {
 	);
 }
 
+// Initialise the mutation observer when the video player becomes available.
 export default function init () {
 	wait_element('.NFPlayer.nf-player-container')
 		.then(function(player) {

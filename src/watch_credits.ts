@@ -20,6 +20,7 @@ import logger from './logger';
 import wait_element from './wait_element';
 
 
+// Remove the "Watch Credits" button.
 function init_mutation_observer (controls_el) {
 	const observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
@@ -41,6 +42,8 @@ function init_mutation_observer (controls_el) {
 				const pointer_event = new PointerEvent('pointerdown', { bubbles: true });
 				watch_credits_button.dispatchEvent(pointer_event);
 
+				// When playback controls return as a result of having pressed
+				// "Watch Credits", they become visible. Keep them hidden.
 				controls.hide();
 
 				return;
@@ -57,6 +60,7 @@ function init_mutation_observer (controls_el) {
 	);
 }
 
+// Initialise the mutation observer when playback controls become available.
 export default function init () {
 	wait_element('.PlayerControlsNeo__all-controls')
 		.then(function(controls_el) {

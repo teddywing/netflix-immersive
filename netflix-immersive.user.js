@@ -27,6 +27,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = require("./logger");
 var controls = {
+    // Hide playback controls.
     hide: function () {
         logger_1.default.debug('hide():', 'Hiding controls');
         var controls_el = document.querySelector('.PlayerControlsNeo__layout.PlayerControlsNeo__layout--active');
@@ -43,15 +44,21 @@ exports.default = controls;
 Object.defineProperty(exports, "__esModule", { value: true });
 var controls_1 = require("./controls");
 var wait_element_1 = require("./wait_element");
+// Prevent credits from being minimised.
 function init_mutation_observer(player) {
     var observer = new MutationObserver(function (mutation_list) {
         for (var i = 0; i < mutation_list.length; i++) {
             var mutation = mutation_list[i];
             var player_1 = mutation.target;
+            // The `postplay` class minimises the movie. Remove it if it gets
+            // added to remain in full frame.
             if (player_1.classList.contains('postplay')) {
                 player_1.classList.remove('postplay');
-                // Activate player controls.
+                // Playback controls are removed when postplay is activated.
+                // Re-enable them.
                 player_1.click();
+                // Activating playback controls makes them visible. Keep them
+                // hidden.
                 controls_1.default.hide();
                 return;
             }
@@ -62,6 +69,7 @@ function init_mutation_observer(player) {
         attributeOldValue: true
     });
 }
+// Initialise the mutation observer when the video player becomes available.
 function init() {
     wait_element_1.default('.NFPlayer.nf-player-container')
         .then(function (player) {
@@ -103,6 +111,7 @@ exports.default = {
 },{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// Adds CSS to the page to hide superfluous user interface elements.
 function styles() {
     var style = document.createElement('style');
     document.head.appendChild(style);
@@ -115,6 +124,8 @@ exports.default = styles;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = require("./logger");
+// Wait for the element corresponding to `selector` to be added to the page,
+// checking every second until it appears.
 function wait_element(selector) {
     return new Promise(function (resolve) {
         var interval = setInterval(function () {
@@ -135,6 +146,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var controls_1 = require("./controls");
 var logger_1 = require("./logger");
 var wait_element_1 = require("./wait_element");
+// Remove the "Watch Credits" button.
 function init_mutation_observer(controls_el) {
     var observer = new MutationObserver(function (mutation_list) {
         for (var i = 0; i < mutation_list.length; i++) {
@@ -145,6 +157,8 @@ function init_mutation_observer(controls_el) {
                 logger_1.default.debug('watch_credits', 'init_mutation_observer()', 'found Watch Credits button', watch_credits_button);
                 var pointer_event = new PointerEvent('pointerdown', { bubbles: true });
                 watch_credits_button.dispatchEvent(pointer_event);
+                // When playback controls return as a result of having pressed
+                // "Watch Credits", they become visible. Keep them hidden.
                 controls_1.default.hide();
                 return;
             }
@@ -155,6 +169,7 @@ function init_mutation_observer(controls_el) {
         subtree: true
     });
 }
+// Initialise the mutation observer when playback controls become available.
 function init() {
     wait_element_1.default('.PlayerControlsNeo__all-controls')
         .then(function (controls_el) {

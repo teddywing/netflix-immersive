@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Immersive. If not, see <https://www.gnu.org/licenses/>.
 
+// Adds CSS to the page to hide superfluous user interface elements.
 export default function styles () {
 	const style = document.createElement('style');
 

@@ -19,6 +19,7 @@ import logger from './logger';
 
 
 const controls = {
+	// Hide playback controls.
 	hide: function() {
 		logger.debug('hide():', 'Hiding controls');
 

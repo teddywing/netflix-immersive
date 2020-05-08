@@ -18,6 +18,8 @@
 import logger from './logger';
 
 
+// Wait for the element corresponding to `selector` to be added to the page,
+// checking every second until it appears.
 export default function wait_element (selector: string): Promise<Element> {
 	return new Promise(function(resolve) {
 		const interval = setInterval(
