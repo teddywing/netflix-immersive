@@ -5,6 +5,7 @@
 		"outDir": "./build",
 		"sourceMap": true,
 		"lib": [
+			"DOM",
 			"ES2015"
 		]
 	},

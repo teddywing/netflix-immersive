@@ -1,4 +1,5 @@
-import with_player from './player';
+import controls from './controls';
+import wait_element from './wait_element';
 
 
 function init_mutation_observer (player) {
@@ -24,12 +25,7 @@ function init_mutation_observer (player) {
 				// 	.classList
 				// 	.add('PlayerControlsNeo__bottom-controls--faded');
 
-				document.querySelector('.PlayerControlsNeo__layout.PlayerControlsNeo__layout--active')
-					.classList
-					.replace(
-						'PlayerControlsNeo__layout--active',
-						'PlayerControlsNeo__layout--inactive'
-					);
+				controls.hide();
 
 				// .OriginalsPostPlay-BackgroundTrailer .BackToBrowse
 
@@ -48,7 +44,8 @@ function init_mutation_observer (player) {
 }
 
 export default function init () {
-	with_player().then(function(player) {
-		init_mutation_observer(player);
-	});
+	wait_element('.NFPlayer.nf-player-container')
+		.then(function(player) {
+			init_mutation_observer(player);
+		});
 }
