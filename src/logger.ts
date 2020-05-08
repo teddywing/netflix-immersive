@@ -1,5 +1,5 @@
 export default {
 	debug(...args) {
-		console.debug('NoSkip:', ...args);
+		console.debug('Immersive:', ...args);
 	}
 };

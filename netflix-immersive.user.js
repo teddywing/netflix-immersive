@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Netflix No Skip
+// @name Netflix Immersive
 // @description Netflix user script providing a more immersive experience
 // @version 0.0.1
 // @namespace com.teddywing
@@ -81,7 +81,7 @@ exports.default = {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        console.debug.apply(console, __spreadArrays(['NoSkip:'], args));
+        console.debug.apply(console, __spreadArrays(['Immersive:'], args));
     }
 };
 

@@ -1,5 +1,5 @@
 {
-  "name": "netflix-no-skip",
+  "name": "netflix-immersive",
   "description": "Don't skip intros, recaps, or credits",
   "version": "0.0.1",
   "devDependencies": {

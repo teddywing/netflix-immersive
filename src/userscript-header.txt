@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name Netflix No Skip
+// @name Netflix Immersive
 // @description Netflix user script providing a more immersive experience
 // @version 0.0.1
 // @namespace com.teddywing
