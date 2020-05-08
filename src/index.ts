@@ -16,7 +16,7 @@
 // along with Immersive. If not, see <https://www.gnu.org/licenses/>.
 
 import fullscreen_credits from './fullscreen_credits';
-import { styles } from './styles';
+import styles from './styles';
 import watch_credits from './watch_credits';
 
 

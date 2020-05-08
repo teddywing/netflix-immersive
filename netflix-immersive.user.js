@@ -76,7 +76,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var fullscreen_credits_1 = require("./fullscreen_credits");
 var styles_1 = require("./styles");
 var watch_credits_1 = require("./watch_credits");
-styles_1.styles();
+styles_1.default();
 fullscreen_credits_1.default();
 watch_credits_1.default();
 
@@ -109,7 +109,7 @@ function styles() {
     var stylesheet = style.sheet;
     stylesheet.insertRule("\n\t\t/* \"Back to Browse\" button that appears when credits are minimised. */\n\t\t.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,\n\n\t\t/* Age rating. */\n\t\t.player-view-childrens,\n\n\t\t/* \"Watch Credits\" button. */\n\t\t[data-uia=\"watch-credits-seamless-button\"],\n\n\t\t/* Skip buttons. */\n\t\ta[aria-label=\"Skip Intro\"],\n\t\ta[aria-label=\"Skip Recap\"],\n\t\ta[aria-label=\"Next Episode\"],\n\t\t[data-uia=\"next-episode-seamless-button\"] {\n\t\t\tvisibility: hidden;\n\t\t}", stylesheet.cssRules.length);
 }
-exports.styles = styles;
+exports.default = styles;
 
 },{}],6:[function(require,module,exports){
 "use strict";
