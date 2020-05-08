@@ -25,7 +25,7 @@ build/%.js: src/%.ts
 	$(TSC)
 
 	@# Remove license headers
-	perl -ni -e 'print unless ($$record_count = /^\/\/ Copyright/ .. /^(?!\/\/)/ and $$record_count !~ /E0$$/)' $@
+	perl -ni -e 'print unless ($$record_count = /^\/\/ Copyright/ .. /^(?!\/\/)/ and $$record_count !~ /E0$$/)' build/*.js
 
 netflix-immersive.user.js: build/index.js build/*.js src/userscript-header.txt
 	$(BROWSERIFY) $< -o $@
