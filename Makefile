@@ -8,7 +8,7 @@ build/%.js: src/%.ts
 	$(TSC)
 
 netflix-no-skip.user.js: build/index.js build/*.js src/userscript-header.txt
-	$(BROWSERIFY) $^ -o $@
+	$(BROWSERIFY) $< -o $@
 
 	cat src/userscript-header.txt $@ > $@.tmp
 	mv $@.tmp $@
