@@ -14,4 +14,9 @@ export function styles () {
 		'.player-view-childrens { visibility: hidden; }',
 		stylesheet.cssRules.length
 	);
+
+	stylesheet.insertRule(
+		'[data-uia="watch-credits-seamless-button"] { visibility: hidden; }',
+		stylesheet.cssRules.length
+	);
 }
