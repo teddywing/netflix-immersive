@@ -38,7 +38,7 @@ export default function styles () {
 		a[aria-label="Skip Recap"],
 		a[aria-label="Next Episode"],
 		[data-uia="next-episode-seamless-button"] {
-			visibility: hidden;
+			visibility: hidden !important;
 		}`,
 		stylesheet.cssRules.length
 	);
