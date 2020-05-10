@@ -47,8 +47,7 @@ function init_mutation_observer (player) {
 	observer.observe(
 		player,
 		{
-			attributeFilter: ['class'],
-			attributeOldValue: true
+			attributeFilter: ['class']
 		}
 	);
 }

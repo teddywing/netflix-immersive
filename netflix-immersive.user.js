@@ -98,8 +98,7 @@ function init_mutation_observer(player) {
         }
     });
     observer.observe(player, {
-        attributeFilter: ['class'],
-        attributeOldValue: true
+        attributeFilter: ['class']
     });
 }
 // Initialise the mutation observer when the video player becomes available.
