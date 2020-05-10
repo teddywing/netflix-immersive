@@ -42,4 +42,12 @@ export default function styles () {
 		}`,
 		stylesheet.cssRules.length
 	);
+
+	stylesheet.insertRule(`
+		/* Remove white border around credits. */
+		.NFPlayer.can-resume:hover {
+			border: none !important;
+		}`,
+		stylesheet.cssRules.length
+	);
 }
