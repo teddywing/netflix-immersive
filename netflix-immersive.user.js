@@ -30,6 +30,8 @@ var controls = {
     // Hide playback controls.
     hide: function () {
         logger_1.default.debug('hide():', 'Hiding controls');
+        // When the player is activated, the mouse cursor is shown.
+        hide_cursor();
         var controls_el = document.querySelector('.PlayerControlsNeo__layout.PlayerControlsNeo__layout--active');
         logger_1.default.debug('hide():', 'Controls:', controls_el);
         controls_el
@@ -38,6 +40,37 @@ var controls = {
     }
 };
 exports.default = controls;
+// Hide the cursor, which appears due to the `active` CSS class when the player
+// is reactivated.
+function hide_cursor() {
+    var style_el = document.createElement('style');
+    // Hide the cursor.
+    function style() {
+        document.head.appendChild(style_el);
+        var stylesheet = style_el.sheet;
+        stylesheet.insertRule("\n\t\t\t.NFPlayer.nf-player-container.active {\n\t\t\t\tcursor: none !important;\n\t\t\t}", stylesheet.cssRules.length);
+    }
+    // When the player reappears, set it to inactive.
+    function set_player_inactive() {
+        var observer = new MutationObserver(function (mutation_list) {
+            for (var i = 0; i < mutation_list.length; i++) {
+                var mutation = mutation_list[i];
+                var player = mutation.target;
+                if (player.classList.contains('active')) {
+                    player.classList.replace('active', 'inactive');
+                    document.head.removeChild(style_el);
+                    observer.disconnect();
+                    return;
+                }
+            }
+        });
+        observer.observe(document.querySelector('.NFPlayer.nf-player-container'), {
+            attributeFilter: ['class']
+        });
+    }
+    set_player_inactive();
+    style();
+}
 
 },{"./logger":4}],2:[function(require,module,exports){
 "use strict";
