@@ -4,7 +4,7 @@
 // @version 0.0.1
 // @namespace com.teddywing
 // @run-at document-idle
-// @match https://www.netflix.com/watch/*
+// @match https://www.netflix.com/*
 // ==/UserScript==
 
 // Copyright (c) 2020  Teddy Wing
