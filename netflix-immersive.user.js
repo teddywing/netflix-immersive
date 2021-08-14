@@ -153,12 +153,10 @@ window.onpopstate = main;
 
 },{"./fullscreen_credits":2,"./logger":4,"./seamless":5,"./styles":6,"./watch_credits":8}],4:[function(require,module,exports){
 "use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = {
@@ -167,7 +165,7 @@ exports.default = {
         for (var _i = 0; _i < arguments.length; _i++) {
             args[_i] = arguments[_i];
         }
-        console.debug.apply(console, __spreadArrays(['Immersive:'], args));
+        console.debug.apply(console, __spreadArray(['Immersive:'], args));
     }
 };
 

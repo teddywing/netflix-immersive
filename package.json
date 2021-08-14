@@ -3,8 +3,8 @@
   "description": "Don't skip intros, recaps, or credits",
   "version": "0.1.0",
   "devDependencies": {
-    "browserify": "^16.5.1",
-    "typescript": "^3.8.3"
+    "browserify": "^17.0.0",
+    "typescript": "^4.3.5"
   },
   "private": true
 }
