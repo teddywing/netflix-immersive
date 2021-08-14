@@ -1,4 +1,4 @@
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -23,12 +23,15 @@ export default function styles () {
 
 	const stylesheet = style.sheet as CSSStyleSheet;
 
+	// 2021.08.13: May want to remove `.player-view-childrens`, which is now
+	// replaced by `.advisory-container`.
 	stylesheet.insertRule(`
 		/* "Back to Browse" button that appears when credits are minimised. */
 		.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,
 
 		/* Age rating. */
 		.player-view-childrens,
+		.advisory-container,
 
 		/* "Watch Credits" button. */
 		[data-uia="watch-credits-seamless-button"],
