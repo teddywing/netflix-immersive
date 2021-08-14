@@ -15,6 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with Immersive. If not, see <https://www.gnu.org/licenses/>.
 
+// Check episode credits. Maybe `with_hidden_controls()`.
 import controls from './controls';
 import logger from './logger';
 import wait_element from './wait_element';
