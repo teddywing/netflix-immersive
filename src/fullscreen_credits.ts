@@ -16,6 +16,7 @@
 // along with Immersive. If not, see <https://www.gnu.org/licenses/>.
 
 import controls from './controls';
+import logger from './logger';
 import wait_element from './wait_element';
 
 
@@ -30,6 +31,8 @@ function init_mutation_observer (player) {
 			// The `postplay` class minimises the movie. Remove it if it gets
 			// added to remain in full frame.
 			if (player.classList.contains('watch-video--player-view-minimized')) {
+				logger.debug('fullscreen_credits', 'init_mutation_observer()', 'Maximising');
+
 				player.classList.remove('watch-video--player-view-minimized');
 
 				// Resize the video to full frame. Otherwise it will shrink for

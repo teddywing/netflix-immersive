@@ -75,6 +75,7 @@ function hide_cursor() {
 },{"./logger":4}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var logger_1 = require("./logger");
 var wait_element_1 = require("./wait_element");
 // Prevent credits from being minimised.
 function init_mutation_observer(player) {
@@ -86,6 +87,7 @@ function init_mutation_observer(player) {
             // The `postplay` class minimises the movie. Remove it if it gets
             // added to remain in full frame.
             if (player_1.classList.contains('watch-video--player-view-minimized')) {
+                logger_1.default.debug('fullscreen_credits', 'init_mutation_observer()', 'Maximising');
                 player_1.classList.remove('watch-video--player-view-minimized');
                 // Resize the video to full frame. Otherwise it will shrink for
                 // a second until the click event kicks in.
