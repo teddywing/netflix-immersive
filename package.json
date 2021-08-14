@@ -1,7 +1,7 @@
 {
   "name": "netflix-immersive",
   "description": "Don't skip intros, recaps, or credits",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "browserify": "^16.5.1",
     "typescript": "^3.8.3"

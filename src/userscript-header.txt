@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Netflix Immersive
 // @description Netflix user script providing a more immersive experience
-// @version 0.0.1
+// @version 0.1.0
 // @namespace com.teddywing
 // @run-at document-idle
 // @match https://www.netflix.com/*
