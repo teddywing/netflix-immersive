@@ -21,20 +21,6 @@ import wait_element from './wait_element';
 
 // Prevent credits from being minimised.
 function init_mutation_observer (player) {
-	// const controls_observer = new MutationObserver(function(mutation_list) {
-	// 	for (var i = 0; i < mutation_list.length; i++) {
-	// 		const mutation = mutation_list[i];
-	// 		const player = mutation.target as HTMLElement;
-	// 		const controls_el = player.querySelector(
-	// 			'.watch-video--bottom-controls-container'
-	// 		) as HTMLElement;
-    //
-	// 		controls_el.parentNode.removeChild(controls_el);
-    //
-	// 		return;
-	// 	}
-	// });
-
 	const observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
 			const mutation = mutation_list[i];
@@ -51,16 +37,38 @@ function init_mutation_observer (player) {
 				video.style.height = null;
 				video.style.width = 'inherit';
 
+				// Activating playback controls makes them visible. Keep them
+				// hidden.
+				const style_el = document.createElement('style');
+				document.head.appendChild(style_el);
+
+				const stylesheet = style_el.sheet as CSSStyleSheet;
+
+				stylesheet.insertRule(`
+					.watch-video--back-container {
+						visibility: hidden !important;
+					}
+
+					.watch-video--bottom-controls-container {
+						display: none !important;
+					}`,
+					stylesheet.cssRules.length
+				);
+
 				// Playback controls are removed when postplay is activated.
 				// Re-enable them.
 				const click_area = player.children[0] as HTMLElement;
 				click_area.click();
 
-				// Activating playback controls makes them visible. Keep them
-				// hidden.
-				// controls.hide();
-				// controls_observer.observe(player, { subtree: true });
-				// '.watch-video--bottom-controls-container'
+				// Once the player controls auto-hide themselves, remove our
+				// forced hiding so that the controls become user-accessible
+				// again.
+				setTimeout(
+					function() {
+						document.head.removeChild(style_el);
+					},
+					4000
+				);
 
 				return;
 			}

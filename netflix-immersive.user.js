@@ -78,21 +78,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var wait_element_1 = require("./wait_element");
 // Prevent credits from being minimised.
 function init_mutation_observer(player) {
-    // const controls_observer = new MutationObserver(function(mutation_list) {
-    // 	for (var i = 0; i < mutation_list.length; i++) {
-    // 		const mutation = mutation_list[i];
-    // 		const player = mutation.target as HTMLElement;
-    // 		const controls_el = player.querySelector(
-    // 			'.watch-video--bottom-controls-container'
-    // 		) as HTMLElement;
-    //
-    // 		controls_el.parentNode.removeChild(controls_el);
-    //
-    // 		return;
-    // 	}
-    // });
     var observer = new MutationObserver(function (mutation_list) {
-        for (var i = 0; i < mutation_list.length; i++) {
+        var _loop_1 = function () {
             var mutation = mutation_list[i];
             var player_1 = mutation.target;
             var video = player_1.querySelector('video');
@@ -104,17 +91,29 @@ function init_mutation_observer(player) {
                 // a second until the click event kicks in.
                 video.style.height = null;
                 video.style.width = 'inherit';
+                // Activating playback controls makes them visible. Keep them
+                // hidden.
+                var style_el_1 = document.createElement('style');
+                document.head.appendChild(style_el_1);
+                var stylesheet = style_el_1.sheet;
+                stylesheet.insertRule("\n\t\t\t\t\t.watch-video--back-container {\n\t\t\t\t\t\tvisibility: hidden !important;\n\t\t\t\t\t}\n\n\t\t\t\t\t.watch-video--bottom-controls-container {\n\t\t\t\t\t\tdisplay: none !important;\n\t\t\t\t\t}", stylesheet.cssRules.length);
                 // Playback controls are removed when postplay is activated.
                 // Re-enable them.
                 var click_area = player_1.children[0];
                 click_area.click();
-                // Activating playback controls makes them visible. Keep them
-                // hidden.
-                // controls.hide();
-                // controls_observer.observe(player, { subtree: true });
-                // '.watch-video--bottom-controls-container'
-                return;
+                // Once the player controls auto-hide themselves, remove our
+                // forced hiding so that the controls become user-accessible
+                // again.
+                setTimeout(function () {
+                    document.head.removeChild(style_el_1);
+                }, 4000);
+                return { value: void 0 };
             }
+        };
+        for (var i = 0; i < mutation_list.length; i++) {
+            var state_1 = _loop_1();
+            if (typeof state_1 === "object")
+                return state_1.value;
         }
     });
     observer.observe(player, {
