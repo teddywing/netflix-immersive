@@ -26,6 +26,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = require("./logger");
+// 2021.08.14: This may be obsolete, replaced by `seamless.ts`.
 var controls = {
     // Hide playback controls.
     hide: function () {
@@ -256,6 +257,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var controls_1 = require("./controls");
 var logger_1 = require("./logger");
 var wait_element_1 = require("./wait_element");
+// 2021.08.14: This may be obsolete, replaced by `seamless.ts`.
 // Remove the "Watch Credits" button.
 function init_mutation_observer(controls_el) {
     var observer = new MutationObserver(function (mutation_list) {

@@ -17,6 +17,7 @@
 
 import logger from './logger';
 
+// 2021.08.14: This may be obsolete, replaced by `seamless.ts`.
 
 const controls = {
 	// Hide playback controls.
