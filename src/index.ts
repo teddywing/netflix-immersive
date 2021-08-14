@@ -1,4 +1,4 @@
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -17,6 +17,7 @@
 
 import fullscreen_credits from './fullscreen_credits';
 import logger from './logger';
+import seamless from './seamless';
 import styles from './styles';
 import watch_credits from './watch_credits';
 
@@ -27,6 +28,7 @@ function main () {
 	styles();
 	fullscreen_credits();
 	watch_credits();
+	seamless();
 }
 
 

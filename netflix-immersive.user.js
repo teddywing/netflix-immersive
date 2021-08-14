@@ -131,11 +131,12 @@ function init() {
 }
 exports.default = init;
 
-},{"./wait_element":6}],3:[function(require,module,exports){
+},{"./logger":4,"./wait_element":7}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fullscreen_credits_1 = require("./fullscreen_credits");
 var logger_1 = require("./logger");
+var seamless_1 = require("./seamless");
 var styles_1 = require("./styles");
 var watch_credits_1 = require("./watch_credits");
 function main() {
@@ -143,12 +144,13 @@ function main() {
     styles_1.default();
     fullscreen_credits_1.default();
     watch_credits_1.default();
+    seamless_1.default();
 }
 main();
 // Reinitialise when the page changes.
 window.onpopstate = main;
 
-},{"./fullscreen_credits":2,"./logger":4,"./styles":5,"./watch_credits":7}],4:[function(require,module,exports){
+},{"./fullscreen_credits":2,"./logger":4,"./seamless":5,"./styles":6,"./watch_credits":8}],4:[function(require,module,exports){
 "use strict";
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
@@ -171,6 +173,51 @@ exports.default = {
 },{}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var logger_1 = require("./logger");
+var wait_element_1 = require("./wait_element");
+// Hide the cursor when seamless credits are played.
+function init_mutation_observer(player) {
+    var observer = new MutationObserver(function (mutation_list) {
+        var _loop_1 = function () {
+            var mutation = mutation_list[i];
+            var player_1 = mutation.target;
+            var seamless_controls = document.querySelector('.SeamlessControls--container');
+            if (seamless_controls) {
+                logger_1.default.debug('seamless', 'init_mutation_observer()', 'Handling seamless');
+                var style_el_1 = document.createElement('style');
+                // Hide the cursor.
+                document.head.appendChild(style_el_1);
+                var stylesheet = style_el_1.sheet;
+                stylesheet.insertRule("\n\t\t\t\t\tbody {\n\t\t\t\t\t\tcursor: none !important;\n\t\t\t\t\t}", stylesheet.cssRules.length);
+                document.body.onmousemove = function () {
+                    document.head.removeChild(style_el_1);
+                };
+                return { value: void 0 };
+            }
+        };
+        for (var i = 0; i < mutation_list.length; i++) {
+            var state_1 = _loop_1();
+            if (typeof state_1 === "object")
+                return state_1.value;
+        }
+    });
+    observer.observe(player, {
+        childList: true,
+        subtree: true
+    });
+}
+// Initialise the mutation observer when the video player becomes available.
+function init() {
+    wait_element_1.default('.watch-video--player-view')
+        .then(function (player) {
+        init_mutation_observer(player);
+    });
+}
+exports.default = init;
+
+},{"./logger":4,"./wait_element":7}],6:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // Adds CSS to the page to hide superfluous user interface elements.
 function styles() {
     var style = document.createElement('style');
@@ -178,12 +225,12 @@ function styles() {
     var stylesheet = style.sheet;
     // 2021.08.13: May want to remove `.player-view-childrens`, which is now
     // replaced by `.advisory-container`.
-    stylesheet.insertRule("\n\t\t/* \"Back to Browse\" button that appears when credits are minimised. */\n\t\t.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,\n\n\t\t/* Promo that appears during credis */\n\t\t.OriginalsPostPlay-BackgroundTrailer,\n\n\t\t/* Age rating. */\n\t\t.player-view-childrens,\n\t\t.advisory-container,\n\n\t\t/* \"Watch Credits\" button. */\n\t\t[data-uia=\"watch-credits-seamless-button\"],\n\n\t\t/* Skip buttons. */\n\t\ta[aria-label=\"Skip Intro\"],\n\t\ta[aria-label=\"Skip Recap\"],\n\t\ta[aria-label=\"Next Episode\"],\n\t\t[data-uia=\"next-episode-seamless-button\"] {\n\t\t\tvisibility: hidden !important;\n\t\t}", stylesheet.cssRules.length);
+    stylesheet.insertRule("\n\t\t/* \"Back to Browse\" button that appears when credits are minimised. */\n\t\t.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,\n\t\t.watch-video--seamless-back,\n\n\t\t/* Promo that appears during credis */\n\t\t.OriginalsPostPlay-BackgroundTrailer,\n\t\t.SeamlessControls--background-artwork-visible,\n\n\t\t/* Age rating. */\n\t\t.player-view-childrens,\n\t\t.advisory-container,\n\n\t\t/* \"Watch Credits\" button. */\n\t\t[data-uia=\"watch-credits-seamless-button\"],\n\n\t\t/* Skip buttons. */\n\t\ta[aria-label=\"Skip Intro\"],\n\t\ta[aria-label=\"Skip Recap\"],\n\t\ta[aria-label=\"Next Episode\"],\n\t\t[data-uia=\"next-episode-seamless-button\"] {\n\t\t\tvisibility: hidden !important;\n\t\t}", stylesheet.cssRules.length);
     stylesheet.insertRule("\n\t\t/* Remove white border around credits. */\n\t\t.NFPlayer.can-resume:hover {\n\t\t\tborder: none !important;\n\t\t}", stylesheet.cssRules.length);
 }
 exports.default = styles;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var logger_1 = require("./logger");
@@ -203,7 +250,7 @@ function wait_element(selector) {
 }
 exports.default = wait_element;
 
-},{"./logger":4}],7:[function(require,module,exports){
+},{"./logger":4}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var controls_1 = require("./controls");
@@ -242,4 +289,4 @@ function init() {
 }
 exports.default = init;
 
-},{"./controls":1,"./logger":4,"./wait_element":6}]},{},[3]);
+},{"./controls":1,"./logger":4,"./wait_element":7}]},{},[3]);

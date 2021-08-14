@@ -28,9 +28,11 @@ export default function styles () {
 	stylesheet.insertRule(`
 		/* "Back to Browse" button that appears when credits are minimised. */
 		.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,
+		.watch-video--seamless-back,
 
 		/* Promo that appears during credis */
 		.OriginalsPostPlay-BackgroundTrailer,
+		.SeamlessControls--background-artwork-visible,
 
 		/* Age rating. */
 		.player-view-childrens,
