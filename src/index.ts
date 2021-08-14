@@ -16,11 +16,14 @@
 // along with Immersive. If not, see <https://www.gnu.org/licenses/>.
 
 import fullscreen_credits from './fullscreen_credits';
+import logger from './logger';
 import styles from './styles';
 import watch_credits from './watch_credits';
 
 
 function main () {
+	logger.debug('Initialising');
+
 	styles();
 	fullscreen_credits();
 	watch_credits();

@@ -114,9 +114,11 @@ exports.default = init;
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fullscreen_credits_1 = require("./fullscreen_credits");
+var logger_1 = require("./logger");
 var styles_1 = require("./styles");
 var watch_credits_1 = require("./watch_credits");
 function main() {
+    logger_1.default.debug('Initialising');
     styles_1.default();
     fullscreen_credits_1.default();
     watch_credits_1.default();
@@ -125,7 +127,7 @@ main();
 // Reinitialise when the page changes.
 window.onpopstate = main;
 
-},{"./fullscreen_credits":2,"./styles":5,"./watch_credits":7}],4:[function(require,module,exports){
+},{"./fullscreen_credits":2,"./logger":4,"./styles":5,"./watch_credits":7}],4:[function(require,module,exports){
 "use strict";
 var __spreadArrays = (this && this.__spreadArrays) || function () {
     for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
