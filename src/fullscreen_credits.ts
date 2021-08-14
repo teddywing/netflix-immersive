@@ -1,4 +1,4 @@
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -21,23 +21,46 @@ import wait_element from './wait_element';
 
 // Prevent credits from being minimised.
 function init_mutation_observer (player) {
+	// const controls_observer = new MutationObserver(function(mutation_list) {
+	// 	for (var i = 0; i < mutation_list.length; i++) {
+	// 		const mutation = mutation_list[i];
+	// 		const player = mutation.target as HTMLElement;
+	// 		const controls_el = player.querySelector(
+	// 			'.watch-video--bottom-controls-container'
+	// 		) as HTMLElement;
+    //
+	// 		controls_el.parentNode.removeChild(controls_el);
+    //
+	// 		return;
+	// 	}
+	// });
+
 	const observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
 			const mutation = mutation_list[i];
 			const player = mutation.target as HTMLElement;
+			const video = player.querySelector('video') as HTMLElement;
 
 			// The `postplay` class minimises the movie. Remove it if it gets
 			// added to remain in full frame.
-			if (player.classList.contains('postplay')) {
-				player.classList.remove('postplay');
+			if (player.classList.contains('watch-video--player-view-minimized')) {
+				player.classList.remove('watch-video--player-view-minimized');
+
+				// Resize the video to full frame. Otherwise it will shrink for
+				// a second until the click event kicks in.
+				video.style.height = null;
+				video.style.width = 'inherit';
 
 				// Playback controls are removed when postplay is activated.
 				// Re-enable them.
-				player.click();
+				const click_area = player.children[0] as HTMLElement;
+				click_area.click();
 
 				// Activating playback controls makes them visible. Keep them
 				// hidden.
-				controls.hide();
+				// controls.hide();
+				// controls_observer.observe(player, { subtree: true });
+				// '.watch-video--bottom-controls-container'
 
 				return;
 			}
@@ -54,7 +77,7 @@ function init_mutation_observer (player) {
 
 // Initialise the mutation observer when the video player becomes available.
 export default function init () {
-	wait_element('.NFPlayer.nf-player-container')
+	wait_element('.watch-video--player-view')
 		.then(function(player) {
 			init_mutation_observer(player);
 		});

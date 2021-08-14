@@ -29,6 +29,9 @@ export default function styles () {
 		/* "Back to Browse" button that appears when credits are minimised. */
 		.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,
 
+		/* Promo that appears during credis */
+		.OriginalsPostPlay-BackgroundTrailer,
+
 		/* Age rating. */
 		.player-view-childrens,
 		.advisory-container,

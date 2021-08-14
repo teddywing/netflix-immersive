@@ -32,7 +32,7 @@ var controls = {
         logger_1.default.debug('hide():', 'Hiding controls');
         // When the player is activated, the mouse cursor is shown.
         hide_cursor();
-        var controls_el = document.querySelector('.PlayerControlsNeo__layout.PlayerControlsNeo__layout--active');
+        var controls_el = document.querySelector('.watch-video--bottom-controls-container');
         logger_1.default.debug('hide():', 'Controls:', controls_el);
         controls_el
             .classList
@@ -75,24 +75,44 @@ function hide_cursor() {
 },{"./logger":4}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var controls_1 = require("./controls");
 var wait_element_1 = require("./wait_element");
 // Prevent credits from being minimised.
 function init_mutation_observer(player) {
+    // const controls_observer = new MutationObserver(function(mutation_list) {
+    // 	for (var i = 0; i < mutation_list.length; i++) {
+    // 		const mutation = mutation_list[i];
+    // 		const player = mutation.target as HTMLElement;
+    // 		const controls_el = player.querySelector(
+    // 			'.watch-video--bottom-controls-container'
+    // 		) as HTMLElement;
+    //
+    // 		controls_el.parentNode.removeChild(controls_el);
+    //
+    // 		return;
+    // 	}
+    // });
     var observer = new MutationObserver(function (mutation_list) {
         for (var i = 0; i < mutation_list.length; i++) {
             var mutation = mutation_list[i];
             var player_1 = mutation.target;
+            var video = player_1.querySelector('video');
             // The `postplay` class minimises the movie. Remove it if it gets
             // added to remain in full frame.
-            if (player_1.classList.contains('postplay')) {
-                player_1.classList.remove('postplay');
+            if (player_1.classList.contains('watch-video--player-view-minimized')) {
+                player_1.classList.remove('watch-video--player-view-minimized');
+                // Resize the video to full frame. Otherwise it will shrink for
+                // a second until the click event kicks in.
+                video.style.height = null;
+                video.style.width = 'inherit';
                 // Playback controls are removed when postplay is activated.
                 // Re-enable them.
-                player_1.click();
+                var click_area = player_1.children[0];
+                click_area.click();
                 // Activating playback controls makes them visible. Keep them
                 // hidden.
-                controls_1.default.hide();
+                // controls.hide();
+                // controls_observer.observe(player, { subtree: true });
+                // '.watch-video--bottom-controls-container'
                 return;
             }
         }
@@ -103,14 +123,14 @@ function init_mutation_observer(player) {
 }
 // Initialise the mutation observer when the video player becomes available.
 function init() {
-    wait_element_1.default('.NFPlayer.nf-player-container')
+    wait_element_1.default('.watch-video--player-view')
         .then(function (player) {
         init_mutation_observer(player);
     });
 }
 exports.default = init;
 
-},{"./controls":1,"./wait_element":6}],3:[function(require,module,exports){
+},{"./wait_element":6}],3:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fullscreen_credits_1 = require("./fullscreen_credits");
@@ -157,7 +177,7 @@ function styles() {
     var stylesheet = style.sheet;
     // 2021.08.13: May want to remove `.player-view-childrens`, which is now
     // replaced by `.advisory-container`.
-    stylesheet.insertRule("\n\t\t/* \"Back to Browse\" button that appears when credits are minimised. */\n\t\t.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,\n\n\t\t/* Age rating. */\n\t\t.player-view-childrens,\n\t\t.advisory-container,\n\n\t\t/* \"Watch Credits\" button. */\n\t\t[data-uia=\"watch-credits-seamless-button\"],\n\n\t\t/* Skip buttons. */\n\t\ta[aria-label=\"Skip Intro\"],\n\t\ta[aria-label=\"Skip Recap\"],\n\t\ta[aria-label=\"Next Episode\"],\n\t\t[data-uia=\"next-episode-seamless-button\"] {\n\t\t\tvisibility: hidden !important;\n\t\t}", stylesheet.cssRules.length);
+    stylesheet.insertRule("\n\t\t/* \"Back to Browse\" button that appears when credits are minimised. */\n\t\t.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,\n\n\t\t/* Promo that appears during credis */\n\t\t.OriginalsPostPlay-BackgroundTrailer,\n\n\t\t/* Age rating. */\n\t\t.player-view-childrens,\n\t\t.advisory-container,\n\n\t\t/* \"Watch Credits\" button. */\n\t\t[data-uia=\"watch-credits-seamless-button\"],\n\n\t\t/* Skip buttons. */\n\t\ta[aria-label=\"Skip Intro\"],\n\t\ta[aria-label=\"Skip Recap\"],\n\t\ta[aria-label=\"Next Episode\"],\n\t\t[data-uia=\"next-episode-seamless-button\"] {\n\t\t\tvisibility: hidden !important;\n\t\t}", stylesheet.cssRules.length);
     stylesheet.insertRule("\n\t\t/* Remove white border around credits. */\n\t\t.NFPlayer.can-resume:hover {\n\t\t\tborder: none !important;\n\t\t}", stylesheet.cssRules.length);
 }
 exports.default = styles;
