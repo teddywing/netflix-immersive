@@ -7,7 +7,7 @@
 // @match https://www.netflix.com/*
 // ==/UserScript==
 
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
