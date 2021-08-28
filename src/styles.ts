@@ -45,7 +45,8 @@ export default function styles () {
 		a[aria-label="Skip Intro"],
 		a[aria-label="Skip Recap"],
 		a[aria-label="Next Episode"],
-		[data-uia="next-episode-seamless-button"] {
+		[data-uia="next-episode-seamless-button"],
+		.watch-video--skip-content {
 			visibility: hidden !important;
 		}`,
 		stylesheet.cssRules.length
