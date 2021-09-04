@@ -33,6 +33,7 @@ export default function styles () {
 		/* Promo that appears during credis */
 		.OriginalsPostPlay-BackgroundTrailer,
 		.SeamlessControls--background-artwork-visible,
+		.ptrack-container.fill-container,
 
 		/* Age rating. */
 		.player-view-childrens,
