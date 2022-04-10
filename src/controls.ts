@@ -1,4 +1,4 @@
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -17,6 +17,7 @@
 
 import logger from './logger';
 
+// 2021.08.14: This may be obsolete, replaced by `seamless.ts`.
 
 const controls = {
 	// Hide playback controls.
@@ -27,7 +28,7 @@ const controls = {
 		hide_cursor();
 
 		const controls_el = document.querySelector(
-			'.PlayerControlsNeo__layout.PlayerControlsNeo__layout--active'
+			'.watch-video--bottom-controls-container'
 		);
 		logger.debug('hide():', 'Controls:', controls_el);
 

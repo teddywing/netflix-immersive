@@ -1,4 +1,4 @@
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -19,6 +19,7 @@ import controls from './controls';
 import logger from './logger';
 import wait_element from './wait_element';
 
+// 2021.08.14: This may be obsolete, replaced by `seamless.ts`.
 
 // Remove the "Watch Credits" button.
 function init_mutation_observer (controls_el) {

@@ -1,0 +1,12 @@
+CHANGELOG
+=========
+
+v0.1.0 (2021-08-??):
+	Changes:
+
+	* Update to support Netflix's new player, released in mid-August 2021.
+
+v0.0.1 (2020-05-24):
+	First public release.
+
+ vim:tw=80:comments=:fo+=n:formatlistpat=^\\s*\\*\\s*

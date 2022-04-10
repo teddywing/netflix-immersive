@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name Netflix Immersive
 // @description Netflix user script providing a more immersive experience
-// @version 0.0.1
+// @version 0.1.0
 // @namespace com.teddywing
 // @run-at document-idle
 // @match https://www.netflix.com/*
 // ==/UserScript==
 
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by

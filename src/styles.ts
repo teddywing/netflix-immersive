@@ -1,4 +1,4 @@
-// Copyright (c) 2020  Teddy Wing
+// Copyright (c) 2020–2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -23,12 +23,21 @@ export default function styles () {
 
 	const stylesheet = style.sheet as CSSStyleSheet;
 
+	// 2021.08.13: May want to remove `.player-view-childrens`, which is now
+	// replaced by `.advisory-container`.
 	stylesheet.insertRule(`
 		/* "Back to Browse" button that appears when credits are minimised. */
 		.OriginalsPostPlay-BackgroundTrailer .BackToBrowse,
+		.watch-video--seamless-back,
+
+		/* Promo that appears during credis */
+		.OriginalsPostPlay-BackgroundTrailer,
+		.SeamlessControls--background-artwork-visible,
+		.ptrack-container.fill-container,
 
 		/* Age rating. */
 		.player-view-childrens,
+		.advisory-container,
 
 		/* "Watch Credits" button. */
 		[data-uia="watch-credits-seamless-button"],
@@ -37,7 +46,8 @@ export default function styles () {
 		a[aria-label="Skip Intro"],
 		a[aria-label="Skip Recap"],
 		a[aria-label="Next Episode"],
-		[data-uia="next-episode-seamless-button"] {
+		[data-uia="next-episode-seamless-button"],
+		.watch-video--skip-content {
 			visibility: hidden !important;
 		}`,
 		stylesheet.cssRules.length

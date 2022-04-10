@@ -1,4 +1,4 @@
-// Copyright (c) 2020–2021  Teddy Wing
+// Copyright (c) 2021  Teddy Wing
 //
 // This file is part of Immersive.
 //
@@ -19,58 +19,36 @@ import logger from './logger';
 import wait_element from './wait_element';
 
 
-// Prevent credits from being minimised.
+// Hide the cursor when seamless credits are played.
 function init_mutation_observer (player) {
 	const observer = new MutationObserver(function(mutation_list) {
 		for (var i = 0; i < mutation_list.length; i++) {
 			const mutation = mutation_list[i];
 			const player = mutation.target as HTMLElement;
-			const video = player.querySelector('video') as HTMLElement;
 
-			// The `postplay` class minimises the movie. Remove it if it gets
-			// added to remain in full frame.
-			if (player.classList.contains('watch-video--player-view-minimized')) {
-				logger.debug('fullscreen_credits', 'init_mutation_observer()', 'Maximising');
+			const seamless_controls = document.querySelector(
+				'.SeamlessControls--container'
+			);
 
-				player.classList.remove('watch-video--player-view-minimized');
-
-				// Resize the video to full frame. Otherwise it will shrink for
-				// a second until the click event kicks in.
-				video.style.height = null;
-				video.style.width = 'inherit';
-
-				// Activating playback controls makes them visible. Keep them
-				// hidden.
+			if (seamless_controls) {
+				logger.debug('seamless', 'init_mutation_observer()', 'Handling seamless');
 				const style_el = document.createElement('style');
+
+				// Hide the cursor.
 				document.head.appendChild(style_el);
 
 				const stylesheet = style_el.sheet as CSSStyleSheet;
 
 				stylesheet.insertRule(`
-					.watch-video--back-container {
-						visibility: hidden !important;
-					}
-
-					.watch-video--bottom-controls-container {
-						display: none !important;
+					body {
+						cursor: none !important;
 					}`,
 					stylesheet.cssRules.length
 				);
 
-				// Playback controls are removed when postplay is activated.
-				// Re-enable them.
-				const click_area = player.children[0] as HTMLElement;
-				click_area.click();
-
-				// Once the player controls auto-hide themselves, remove our
-				// forced hiding so that the controls become user-accessible
-				// again.
-				setTimeout(
-					function() {
-						document.head.removeChild(style_el);
-					},
-					4000
-				);
+				document.body.onmousemove = function() {
+					document.head.removeChild(style_el);
+				}
 
 				return;
 			}
@@ -80,7 +58,8 @@ function init_mutation_observer (player) {
 	observer.observe(
 		player,
 		{
-			attributeFilter: ['class']
+			childList: true,
+			subtree: true
 		}
 	);
 }
